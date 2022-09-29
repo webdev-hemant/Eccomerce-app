@@ -7,7 +7,7 @@ const Home = () => {
     <div>
       Home
       {/* <HomePageSkeleton /> */}
-      <MyModal open>
+      <MyModal open={false}>
         <h1>This is modal</h1>
       </MyModal>
     </div>

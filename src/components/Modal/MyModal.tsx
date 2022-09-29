@@ -6,7 +6,11 @@ interface IProps {
 }
 
 const MyModal = ({ children = <span></span>, open = false }: IProps) => {
-  return <ReactPortal targetDiv="myModal">{children}</ReactPortal>;
+  return open ? (
+    <ReactPortal targetDiv="myModal">{children}</ReactPortal>
+  ) : (
+    <></>
+  );
 };
 
 export default MyModal;

@@ -9,6 +9,10 @@ interface INavroutes {
 const Navbar = () => {
   const NavRoutes: INavroutes[] = [
     {
+      name: "Home",
+      route: "/",
+    },
+    {
       name: "Electronics",
       route: "/electronics",
     },
@@ -26,13 +30,6 @@ const Navbar = () => {
     },
   ];
 
-  const activeStyle: React.CSSProperties = {
-    background: "black",
-    color: "white",
-  };
-
-  const activeClassName: string = "underline";
-
   return (
     <>
       <nav className={styles.navWrapper}>
@@ -43,9 +40,8 @@ const Navbar = () => {
               <NavLink
                 end={item.route === "/"}
                 to={`${item.route}`}
-                style={({ isActive }) => (isActive ? activeStyle : undefined)}
                 className={({ isActive }) =>
-                  isActive ? activeClassName : undefined
+                  `${styles.navbarLink} ${isActive && styles.activeNavbar}`
                 }
               >
                 {item.name}
