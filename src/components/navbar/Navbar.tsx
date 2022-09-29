@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
+import styles from "./navbar.module.scss";
 
 interface INavroutes {
   name: string;
@@ -8,16 +9,20 @@ interface INavroutes {
 const Navbar = () => {
   const NavRoutes: INavroutes[] = [
     {
-      name: "Home",
-      route: "/",
+      name: "Electronics",
+      route: "/electronics",
     },
     {
-      name: "Checkout",
-      route: "/checkout",
+      name: "Jewelery",
+      route: "/jewelery",
     },
     {
-      name: "Unknown",
-      route: "/unknown",
+      name: "Men's clothing",
+      route: "/men's clothing",
+    },
+    {
+      name: "Women's clothing",
+      route: "/women's clothing",
     },
   ];
 
@@ -29,25 +34,31 @@ const Navbar = () => {
   const activeClassName: string = "underline";
 
   return (
-    <nav>
-      <ul>
-        {NavRoutes.map((item) => (
-          <li key={item.name}>
-            <NavLink
-              end={item.route === "/"}
-              to={item.route}
-              style={({ isActive }) => (isActive ? activeStyle : undefined)}
-              className={({ isActive }) =>
-                isActive ? activeClassName : undefined
-              }
-            >
-              {item.name}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
-      <Outlet />
-    </nav>
+    <>
+      <nav className={styles.navWrapper}>
+        <div className={styles.logoContainer}></div>
+        <ul className={styles.navlinkWrapper}>
+          {NavRoutes.map((item) => (
+            <li key={item.name}>
+              <NavLink
+                end={item.route === "/"}
+                to={`${item.route}`}
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                className={({ isActive }) =>
+                  isActive ? activeClassName : undefined
+                }
+              >
+                {item.name}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+        <div className={styles.navCheckoutSection}></div>
+      </nav>
+      <main>
+        <Outlet />
+      </main>
+    </>
   );
 };
 
