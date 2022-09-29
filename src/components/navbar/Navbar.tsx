@@ -6,13 +6,6 @@ interface INavroutes {
 }
 
 const Navbar = () => {
-  const activeStyle: React.CSSProperties = {
-    background: "black",
-    color: "white",
-  };
-
-  const activeClassName: string = "underline";
-
   const NavRoutes: INavroutes[] = [
     {
       name: "Home",
@@ -27,6 +20,13 @@ const Navbar = () => {
       route: "/unknown",
     },
   ];
+
+  const activeStyle: React.CSSProperties = {
+    background: "black",
+    color: "white",
+  };
+
+  const activeClassName: string = "underline";
 
   return (
     <nav>
