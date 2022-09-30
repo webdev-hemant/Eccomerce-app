@@ -1,27 +1,42 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 
-interface IContextType {
-  cartCount: number;
-}
-interface IContextInitialType {
-  data: IContextType;
-  setCtxData: (value: IContextType) => void;
-}
-
-export const GlobalCtx = React.createContext<IContextInitialType>({
-  data: { cartCount: 0 },
-  setCtxData: () => {},
-});
-
-const GlobalContext = ({ children }: { children: JSX.Element }) => {
-  const [data, setData] = useState<IContextType>({ cartCount: 0 });
-
-  const setCtxData = (value: IContextType) => {
-    setData(value);
+interface ICtxInitialData {
+  state: {
+    cartItems: any[];
   };
+  reducerDispatch: React.Dispatch<any>;
+}
 
+export const GlobalCtx = React.createContext<ICtxInitialData>({
+  state: {
+    cartItems: [],
+  },
+  reducerDispatch: () => {},
+});
+const initialState = {
+  cartItems: [],
+};
+const cartReducer = (state: any, action: any): any => {
+  const { newStateData } = action;
+  switch (action.type) {
+    case "addToCart":
+      const newState = {
+        ...state,
+        cartItems: [...state.cartItems, newStateData],
+      };
+      // state.cartItems.push(newStateData);
+      // const filteredState = state.cartItems.filter(item => )
+      // console.log(state);
+      return newState;
+  }
+};
+const GlobalContext = ({ children }: { children: JSX.Element }) => {
+  const [state, dispatch] = useReducer(cartReducer, initialState);
+  const reducerDispatch = (value: any) => {
+    dispatch(value);
+  };
   return (
-    <GlobalCtx.Provider value={{ data, setCtxData }}>
+    <GlobalCtx.Provider value={{ state, reducerDispatch }}>
       {children}
     </GlobalCtx.Provider>
   );

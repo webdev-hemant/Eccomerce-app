@@ -3,6 +3,9 @@ import starIcon from "images/star.png";
 import { useNavigate } from "react-router-dom";
 import styles from "./product.module.scss";
 
+import { useContext } from "react";
+import { GlobalCtx } from "context/GlobalContextProvider";
+
 interface IProps {
   variant: Productvariant;
   data: {
@@ -21,6 +24,14 @@ interface IProps {
 
 const Product = ({ data, variant }: IProps) => {
   const navigate = useNavigate();
+  const { reducerDispatch } = useContext(GlobalCtx);
+
+  const addToCart = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+    reducerDispatch({ type: "addToCart", newStateData: data });
+  };
   return (
     <div
       onClick={() => navigate(`/products/${data?.id}`)}
@@ -55,13 +66,7 @@ const Product = ({ data, variant }: IProps) => {
             </p>
           </div>
           <div className={styles.addTocartBtn}>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                console.log(data);
-              }}
-              type="button"
-            >
+            <button onClick={addToCart} type="button">
               Add to cart
             </button>
           </div>

@@ -15,7 +15,7 @@ interface INavroutes {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
-  const { data } = useContext(GlobalCtx);
+  const { state } = useContext(GlobalCtx);
 
   const NavRoutes: INavroutes[] = [
     {
@@ -72,7 +72,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className={styles.navCheckoutSection}>
-          <span className={styles.cartNumber}>{data.cartCount}</span>
+          <span className={styles.cartNumber}>{state?.cartItems?.length}</span>
           <img src={shoppingcart} alt="" />
         </div>
       </nav>
