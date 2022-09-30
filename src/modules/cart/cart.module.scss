@@ -1,0 +1,98 @@
+@import "../../cssGlobal/variables.scss";
+
+.cartWrapper {
+  min-height: 80vh;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+  .productInformation {
+    margin: 1rem;
+    .cartArrayContainer {
+      background-color: $clr_5;
+      margin: 1rem 0;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      min-height: 5rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      border-radius: 0.5rem;
+      border: 1.5px solid $clr_1;
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+      }
+      .imgContainer {
+        width: 6rem;
+        height: 4rem;
+        img {
+          border-radius: 50%;
+          object-fit: contain;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .details {
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+          margin: 1rem 0;
+        }
+        h6 {
+          white-space: nowrap;
+          font-size: 1rem;
+        }
+      }
+      button {
+        padding: 0.5rem;
+        cursor: pointer;
+      }
+    }
+  }
+  .cartCheckoutContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    // background-color: lightblue;
+    padding: 1rem;
+    @media screen and (max-width: 768px) {
+      grid-row: 1;
+    }
+    .cartTotal {
+      padding: 1rem;
+      width: 15rem;
+      min-height: 12rem;
+      background-color: $clr_5;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+      .title {
+        text-align: end;
+      }
+      .discount {
+        margin: 1rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1rem;
+      }
+      .priceTotal {
+        // margin-top: 6rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .proceed {
+        margin-top: 1rem;
+        cursor: pointer;
+        font-size: 1rem;
+        width: 100%;
+        padding: 0.5rem 0;
+        color: $clr_1;
+        background-color: lightcoral;
+      }
+    }
+  }
+}
