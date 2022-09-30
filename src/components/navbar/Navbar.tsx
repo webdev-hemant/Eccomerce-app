@@ -75,7 +75,7 @@ const Navbar = () => {
           <img src={shoppingcart} alt="" />
         </div>
       </nav>
-      <main style={{ padding: "1rem" }}>
+      <main style={{ padding: "0" }}>
         <Outlet />
       </main>
       <MobileNavMenu open={isOpen}>
