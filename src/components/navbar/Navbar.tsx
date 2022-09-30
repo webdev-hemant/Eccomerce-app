@@ -76,7 +76,7 @@ const Navbar = () => {
           <img src={shoppingcart} alt="" />
         </div>
       </nav>
-      <main style={{ padding: "0" }}>
+      <main className={styles.mainContainer}>
         <Outlet />
         <footer
           style={{
