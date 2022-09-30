@@ -1,10 +1,10 @@
 import { Productvariant } from "./ProductVariants";
 import starIcon from "images/star.png";
 import { useNavigate } from "react-router-dom";
-import styles from "./product.module.scss";
-
 import { useContext } from "react";
 import { GlobalCtx } from "context/GlobalContextProvider";
+import { toast, ToastContainer } from "react-toastify";
+import styles from "./product.module.scss";
 
 interface IProps {
   variant: Productvariant;
@@ -31,6 +31,14 @@ const Product = ({ data, variant }: IProps) => {
   ) => {
     event.stopPropagation();
     reducerDispatch({ type: "addToCart", newStateData: data });
+    toast.success(`${data?.title} added to Cart!`, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
   };
   return (
     <div
@@ -72,6 +80,7 @@ const Product = ({ data, variant }: IProps) => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

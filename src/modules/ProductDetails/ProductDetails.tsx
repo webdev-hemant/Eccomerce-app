@@ -2,6 +2,7 @@ import { GlobalCtx } from "context/GlobalContextProvider";
 import starIcon from "images/star.png";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import styles from "./productDetails.module.scss";
 
 interface IApiData {
@@ -64,14 +65,23 @@ const ProductDetails = () => {
         </div>
         <button
           className={styles.addToCategory}
-          onClick={() =>
-            reducerDispatch({ type: "addToCart", newStateData: apiData })
-          }
+          onClick={() => {
+            reducerDispatch({ type: "addToCart", newStateData: apiData });
+            toast.success(`${apiData?.title} added to Cart!`, {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+          }}
           type="button"
         >
           Add to cart
         </button>
       </div>
+      <ToastContainer />
     </div>
   );
 };
