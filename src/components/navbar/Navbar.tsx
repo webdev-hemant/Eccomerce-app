@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import MobileNavMenu from "./MobileNavMenu";
 import closeIcon from "images/close.png";
 import hamburger from "images/hamburger.png";
 import shoppingcart from "images/shoppingcart.png";
+import { GlobalCtx } from "context/GlobalContextProvider";
 import styles from "./navbar.module.scss";
 
 interface INavroutes {
@@ -13,7 +14,7 @@ interface INavroutes {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
-  const [cartNumber, setCartNumber] = useState<number>(0);
+  const { data } = useContext(GlobalCtx);
 
   const NavRoutes: INavroutes[] = [
     {
@@ -70,7 +71,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className={styles.navCheckoutSection}>
-          <span className={styles.cartNumber}>{cartNumber}</span>
+          <span className={styles.cartNumber}>{data.cartCount}</span>
           <img src={shoppingcart} alt="" />
         </div>
       </nav>
