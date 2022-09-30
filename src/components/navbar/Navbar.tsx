@@ -1,4 +1,10 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import MobileNavMenu from "./MobileNavMenu";
+import closeIcon from "images/close.png";
+import hamburger from "images/hamburger.png";
+import shoppingcart from "images/shoppingcart.png";
+import { GlobalCtx } from "context/GlobalContextProvider";
 import styles from "./navbar.module.scss";
 
 interface INavroutes {
@@ -7,7 +13,14 @@ interface INavroutes {
 }
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const { data } = useContext(GlobalCtx);
+
   const NavRoutes: INavroutes[] = [
+    {
+      name: "Home",
+      route: "/",
+    },
     {
       name: "Electronics",
       route: "/electronics",
@@ -26,26 +39,25 @@ const Navbar = () => {
     },
   ];
 
-  const activeStyle: React.CSSProperties = {
-    background: "black",
-    color: "white",
-  };
-
-  const activeClassName: string = "underline";
-
   return (
     <>
       <nav className={styles.navWrapper}>
-        <div className={styles.logoContainer}></div>
+        <div className={styles.logoContainer}>
+          <Link to={"/"}>
+            <img src="/logo.png" alt="" />
+          </Link>
+        </div>
+        <div onClick={() => setIsOpen(true)} className={styles.mobileHam}>
+          <img src={hamburger} width={24} height={24} alt="" />
+        </div>
         <ul className={styles.navlinkWrapper}>
           {NavRoutes.map((item) => (
             <li key={item.name}>
               <NavLink
                 end={item.route === "/"}
                 to={`${item.route}`}
-                style={({ isActive }) => (isActive ? activeStyle : undefined)}
                 className={({ isActive }) =>
-                  isActive ? activeClassName : undefined
+                  `${styles.navbarLink} ${isActive && styles.activeNavbar}`
                 }
               >
                 {item.name}
@@ -53,11 +65,38 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div className={styles.navCheckoutSection}></div>
+        <div className={styles.mobileViewLogo}>
+          <Link to={"/"}>
+            <img src="/logo.png" alt="" />
+          </Link>
+        </div>
+        <div className={styles.navCheckoutSection}>
+          <span className={styles.cartNumber}>{data.cartCount}</span>
+          <img src={shoppingcart} alt="" />
+        </div>
       </nav>
-      <main>
+      <main style={{ padding: "1rem" }}>
         <Outlet />
       </main>
+      <MobileNavMenu open={isOpen}>
+        <div className={styles.mobile_nav_wrapper}>
+          <div onClick={() => setIsOpen(false)} className={styles.closeHamIcon}>
+            <img src={closeIcon} width={24} height={24} alt="" />
+          </div>
+          <ul className={styles.mobileNavListContainer}>
+            {/* {navbarRoutes.map((item: InavbarRoutes) => (
+              <li
+                key={item.name}
+                className={`${router.pathname === item.route && styles.active}`}
+              >
+                <Link href={item.route}>
+                  <a>{item.name}</a>
+                </Link>
+              </li>
+            ))} */}
+          </ul>
+        </div>
+      </MobileNavMenu>
     </>
   );
 };
