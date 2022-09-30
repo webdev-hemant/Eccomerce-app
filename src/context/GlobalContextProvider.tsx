@@ -33,11 +33,19 @@ const cartReducer = (state: any, action: any): any => {
   const { newStateData } = action;
   switch (action.type) {
     case "addToCart":
-      const newState = {
+      const newAddedToCart = {
         ...state,
         cartItems: [...state.cartItems, newStateData],
       };
-      return newState;
+      return newAddedToCart;
+    case "removeFromCart":
+      const removerFromCart = state.cartItems.filter(
+        (item: any) => item.id !== newStateData.id
+      );
+      return {
+        ...state,
+        cartItems: removerFromCart,
+      };
   }
 };
 const GlobalContext = ({ children }: { children: JSX.Element }) => {

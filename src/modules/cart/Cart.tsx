@@ -17,15 +17,22 @@ const Cart = () => {
     <div className={styles.cartWrapper}>
       <div className={styles.productInformation}>
         {state?.cartItems?.map((item) => (
-          <div className={styles.cartArrayContainer}>
+          <div key={item.title} className={styles.cartArrayContainer}>
             <div className={styles.imgContainer}>
               <img src={item.image} alt="" />
             </div>
             <div className={styles.details}>
-              <h5>{item.description}</h5>
+              <h5>{item.title}</h5>
               <h6>price: ${item.price}</h6>
             </div>
-            <button type="button">Remove</button>
+            <button
+              onClick={() =>
+                reducerDispatch({ type: "removeFromCart", newStateData: item })
+              }
+              type="button"
+            >
+              Remove
+            </button>
           </div>
         ))}
       </div>
