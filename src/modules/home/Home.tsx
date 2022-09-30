@@ -1,4 +1,3 @@
-// import HomePageSkeleton from "components/skeletonLoaders/HomePageSkeleton";
 import React, { useCallback, useEffect, useState } from "react";
 import MyModal from "components/Modal/MyModal";
 import MySlider from "components/slider/MySlider";
@@ -44,7 +43,7 @@ const Home = () => {
     <div className={styles.homeWrapper}>
       <MySlider sliderData={apiData} />
       <div className={styles.secondSection}>
-        {apiData?.slice(3, 7).map((item) => (
+        {apiData?.slice(3, 7).map((item: IApiData) => (
           <Product
             variant={Productvariant.PRODUCTWITHTWOCOUMNS}
             key={item.title}
@@ -53,7 +52,7 @@ const Home = () => {
         ))}
       </div>
       <div className={styles.thirdSection}>
-        {apiData?.slice(10, 18).map((item) => (
+        {apiData?.slice(10, 18).map((item: IApiData) => (
           <Product
             variant={Productvariant.PRODUCTWITHFOURCOUMNS}
             key={item.title}
