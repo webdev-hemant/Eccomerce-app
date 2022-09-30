@@ -1,0 +1,33 @@
+@import "../../cssGlobal/variables.scss";
+
+.carouselWrapper {
+  width: 100%;
+  min-height: 100vh;
+  .innerCarousel {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 60vw;
+      height: 25rem;
+      object-fit: contain;
+      margin-bottom: 5rem;
+    }
+    .legendSelect {
+      bottom: 1.875rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: $clr_1;
+      background-color: $clr_2;
+    }
+  }
+  ul {
+    > li {
+      padding: 1rem;
+      background-color: $clr_1;
+      .dot {
+        display: none;
+      }
+    }
+  }
+}

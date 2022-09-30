@@ -1,0 +1,37 @@
+@import "../../cssGlobal/variables.scss";
+
+.homeWrapper {
+  .extendable_class {
+    min-height: 70vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    background-color: $clr_5;
+    @media screen and (max-width: 375px) {
+      grid-template-columns: 1fr;
+    }
+    @media screen and (min-width: 375px) and (max-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .secondSection {
+    @extend .extendable_class;
+    grid-template-columns: repeat(2, 1fr);
+    @media screen and (max-width: 375px) {
+      grid-template-columns: 1fr;
+    }
+    @media screen and (min-width: 375px) and (max-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .thirdSection {
+    @extend .extendable_class;
+    grid-template-columns: repeat(4, 1fr);
+    @media screen and (max-width: 375px) {
+      grid-template-columns: 1fr;
+    }
+    @media screen and (min-width: 375px) and (max-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}

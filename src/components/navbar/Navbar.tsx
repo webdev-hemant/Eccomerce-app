@@ -4,6 +4,7 @@ import MobileNavMenu from "./MobileNavMenu";
 import closeIcon from "images/close.png";
 import hamburger from "images/hamburger.png";
 import shoppingcart from "images/shoppingcart.png";
+import codeIcon from "images/code.png";
 import { GlobalCtx } from "context/GlobalContextProvider";
 import styles from "./navbar.module.scss";
 
@@ -75,8 +76,21 @@ const Navbar = () => {
           <img src={shoppingcart} alt="" />
         </div>
       </nav>
-      <main style={{ padding: "1rem" }}>
+      <main style={{ padding: "0" }}>
         <Outlet />
+        <footer
+          style={{
+            margin: "0.2rem",
+            textTransform: "capitalize",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "0.5rem",
+          }}
+        >
+          <img src={codeIcon} width={20} height={20} alt="" />
+          <p>made with passion by Hemant Jadhav</p>
+        </footer>
       </main>
       <MobileNavMenu open={isOpen}>
         <div className={styles.mobile_nav_wrapper}>
