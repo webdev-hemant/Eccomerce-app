@@ -1,10 +1,35 @@
+import { GlobalCtx } from "context/GlobalContextProvider";
+import { useContext, useEffect, useState } from "react";
 import styles from "./cart.module.scss";
 
 const Cart = () => {
+  const [totalValue, setTotalValue] = useState<number>(0);
+  const { reducerDispatch, state } = useContext(GlobalCtx);
+
+  useEffect(() => {
+    const total = state?.cartItems?.reduce((acc, curr) => {
+      return acc + curr.price;
+    }, 0);
+    setTotalValue(total);
+  }, [state?.cartItems]);
+
   return (
     <div className={styles.cartWrapper}>
-      <div className={styles.productInformation}></div>
-      <div className={styles.cartContainer}>
+      <div className={styles.productInformation}>
+        {state?.cartItems?.map((item) => (
+          <div className={styles.cartArrayContainer}>
+            <div className={styles.imgContainer}>
+              <img src={item.image} alt="" />
+            </div>
+            <div className={styles.details}>
+              <h5>{item.description}</h5>
+              <h6>price: ${item.price}</h6>
+            </div>
+            <button type="button">Remove</button>
+          </div>
+        ))}
+      </div>
+      <div className={styles.cartCheckoutContainer}>
         <div className={styles.cartTotal}>
           <h3 className={styles.title}>Order summery</h3>
           <div className={styles.discount}>
@@ -12,7 +37,7 @@ const Cart = () => {
             <h5>Exchange offer</h5>
           </div>
           <div className={styles.priceTotal}>
-            <h4>Total</h4> <h5>$ 400.99</h5>
+            <h4>Total</h4> <h5>$ {totalValue}</h5>
           </div>
           <button className={styles.proceed} type="button">
             Proceed
