@@ -52,7 +52,7 @@ const Navbar = () => {
           <img src={hamburger} width={24} height={24} alt="" />
         </div>
         <ul className={styles.navlinkWrapper}>
-          {NavRoutes.map((item) => (
+          {NavRoutes.map((item: INavroutes) => (
             <li key={item.name}>
               <NavLink
                 end={item.route === "/"}
@@ -98,16 +98,21 @@ const Navbar = () => {
             <img src={closeIcon} width={24} height={24} alt="" />
           </div>
           <ul className={styles.mobileNavListContainer}>
-            {/* {navbarRoutes.map((item: InavbarRoutes) => (
-              <li
-                key={item.name}
-                className={`${router.pathname === item.route && styles.active}`}
-              >
-                <Link href={item.route}>
-                  <a>{item.name}</a>
-                </Link>
+            {NavRoutes.map((item: INavroutes) => (
+              <li key={item.name}>
+                <NavLink
+                  end={item.route === "/"}
+                  to={`${item.route}`}
+                  className={({ isActive }) =>
+                    `${styles.navbarLinkMobile} ${
+                      isActive && styles.activeNavbar
+                    }`
+                  }
+                >
+                  {item.name}
+                </NavLink>
               </li>
-            ))} */}
+            ))}
           </ul>
         </div>
       </MobileNavMenu>
