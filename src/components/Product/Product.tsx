@@ -38,14 +38,34 @@ const Product = ({ data, variant }: IProps) => {
               : data?.title}
           </h3>
         )}
-        <h4>price : {data?.price}$</h4>
-        <p>
-          {Array(Math.floor(data?.rating?.rate || 0))
-            .fill(1)
-            .map((item) => (
-              <img key={Math.random() * 40} src={starIcon} width={30} alt="" />
-            ))}
-        </p>
+        <div className={styles.priceBtnContainer}>
+          <div className={styles.priceandRatingWrapper}>
+            <h4>price : {data?.price}$</h4>
+            <p>
+              {Array(Math.floor(data?.rating?.rate || 0))
+                .fill(1)
+                .map((item) => (
+                  <img
+                    key={Math.random() * 40}
+                    src={starIcon}
+                    width={30}
+                    alt=""
+                  />
+                ))}
+            </p>
+          </div>
+          <div className={styles.addTocartBtn}>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                console.log(data);
+              }}
+              type="button"
+            >
+              Add to cart
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
