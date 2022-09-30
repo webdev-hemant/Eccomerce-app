@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import MobileNavMenu from "./MobileNavMenu";
 import closeIcon from "images/close.png";
 import hamburger from "images/hamburger.png";
+import shoppingcart from "images/shoppingcart.png";
 import styles from "./navbar.module.scss";
 
 interface INavroutes {
@@ -12,6 +13,7 @@ interface INavroutes {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [cartNumber, setCartNumber] = useState<number>(0);
 
   const NavRoutes: INavroutes[] = [
     {
@@ -67,7 +69,10 @@ const Navbar = () => {
             <img src="/logo.png" alt="" />
           </Link>
         </div>
-        <div className={styles.navCheckoutSection}></div>
+        <div className={styles.navCheckoutSection}>
+          <span className={styles.cartNumber}>{cartNumber}</span>
+          <img src={shoppingcart} alt="" />
+        </div>
       </nav>
       <main style={{ padding: "1rem" }}>
         <Outlet />
