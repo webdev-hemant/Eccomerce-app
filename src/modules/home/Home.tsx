@@ -4,6 +4,7 @@ import MyModal from "components/Modal/MyModal";
 import MySlider from "components/slider/MySlider";
 import Product from "components/Product/Product";
 import styles from "./home.module.scss";
+import { Productvariant } from "components/Product/ProductVariants";
 
 interface IApiData {
   id: number;
@@ -44,12 +45,20 @@ const Home = () => {
       <MySlider sliderData={apiData} />
       <div className={styles.secondSection}>
         {apiData?.slice(3, 7).map((item) => (
-          <Product key={item.title} data={item} />
+          <Product
+            variant={Productvariant.PRODUCTWITHTWOCOUMNS}
+            key={item.title}
+            data={item}
+          />
         ))}
       </div>
       <div className={styles.thirdSection}>
         {apiData?.slice(10, 18).map((item) => (
-          <Product key={item.title} data={item} />
+          <Product
+            variant={Productvariant.PRODUCTWITHFOURCOUMNS}
+            key={item.title}
+            data={item}
+          />
         ))}
       </div>
       <MyModal open={false}>
