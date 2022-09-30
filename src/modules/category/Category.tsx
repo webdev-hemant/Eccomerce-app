@@ -22,12 +22,13 @@ const Category = () => {
   const [data, setData] = useState<IApiData[]>();
 
   const getData = useCallback(async () => {
+    setData([]);
     const jsonData = await fetch(
       `${process.env.REACT_APP_API}/products/category/${categoryName}`
     );
     const data = await jsonData.json();
     setData(data);
-    console.log(data);
+    // console.log(data);
   }, [categoryName]);
 
   useEffect(() => {

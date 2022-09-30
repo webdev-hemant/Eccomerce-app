@@ -18,7 +18,7 @@ interface IProps {
 
 const MySlider = (props: IProps) => {
   const { sliderData } = props;
-  console.log(sliderData);
+  // console.log(sliderData);
 
   return (
     <div className={styles.carouselWrapper}>
