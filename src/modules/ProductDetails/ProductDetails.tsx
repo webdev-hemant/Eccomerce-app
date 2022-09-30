@@ -1,7 +1,8 @@
-import Product from "components/Product/Product";
-import { Productvariant } from "components/Product/ProductVariants";
-import { useCallback, useEffect, useState } from "react";
+import { GlobalCtx } from "context/GlobalContextProvider";
+import starIcon from "images/star.png";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import styles from "./productDetails.module.scss";
 
 interface IApiData {
   id: number;
@@ -19,7 +20,7 @@ interface IApiData {
 const ProductDetails = () => {
   const [apiData, setApiData] = useState<IApiData>({} as IApiData);
   const { productId } = useParams();
-  // console.log(productId);
+  const { reducerDispatch } = useContext(GlobalCtx);
 
   const getData = useCallback(async () => {
     try {
@@ -27,7 +28,6 @@ const ProductDetails = () => {
         `${process.env.REACT_APP_API}/products/${productId}`
       );
       const data = await jsonData.json();
-      // console.log(data);
       setApiData(data);
     } catch (error) {
       console.error(error);
@@ -39,8 +39,39 @@ const ProductDetails = () => {
   }, [getData]);
 
   return (
-    <div>
-      <Product variant={Productvariant.PRODUCTWITHTWOCOUMNS} data={apiData} />
+    <div className={styles.productDetails}>
+      <div className={styles.imgContainer}>
+        <img src={apiData?.image} alt="" />
+      </div>
+      <div className={styles.infoWrapper}>
+        <h2 className={styles.title}>{apiData?.title}</h2>
+        <h3 className={styles.category}>Category: {apiData?.category}</h3>
+        <p className={styles.description}>{apiData?.description}</p>
+        <div className={styles.starPrice}>
+          <div>
+            {Array(Math.floor(apiData?.rating?.rate || 0))
+              .fill(1)
+              .map((item) => (
+                <img
+                  key={Math.random() * 40}
+                  src={starIcon}
+                  width={30}
+                  alt=""
+                />
+              ))}
+          </div>
+          <div className={styles.productPrice}>Price : ${apiData?.price}</div>
+        </div>
+        <button
+          className={styles.addToCategory}
+          onClick={() =>
+            reducerDispatch({ type: "addToCart", newStateData: apiData })
+          }
+          type="button"
+        >
+          Add to cart
+        </button>
+      </div>
     </div>
   );
 };

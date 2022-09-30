@@ -28,7 +28,6 @@ const Category = () => {
     );
     const data = await jsonData.json();
     setData(data);
-    // console.log(data);
   }, [categoryName]);
 
   useEffect(() => {

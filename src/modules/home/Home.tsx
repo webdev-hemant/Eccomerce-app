@@ -1,4 +1,3 @@
-// import HomePageSkeleton from "components/skeletonLoaders/HomePageSkeleton";
 import React, { useCallback, useEffect, useState } from "react";
 import MyModal from "components/Modal/MyModal";
 import MySlider from "components/slider/MySlider";

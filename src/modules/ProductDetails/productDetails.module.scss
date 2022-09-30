@@ -1,0 +1,56 @@
+@import "../../cssGlobal/variables.scss";
+
+.productDetails {
+  padding: 0 2rem;
+  min-height: 80vh;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  grid-template-rows: auto;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+  .imgContainer {
+    height: 80vh;
+    padding: 1rem;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  .infoWrapper {
+    margin: 2rem;
+    .title {
+      color: $clr_1;
+    }
+    .category {
+      margin-top: 0.5rem;
+      color: rgba($color: $clr_1, $alpha: 0.7);
+    }
+    .description {
+      margin-top: 0.5rem;
+      color: rgba($color: $clr_1, $alpha: 0.7);
+    }
+    .starPrice {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      .productPrice {
+        font-size: 1.5rem;
+        color: rgba($color: $clr_1, $alpha: 0.8);
+      }
+    }
+    .addToCategory {
+      margin-top: 1rem;
+      cursor: pointer;
+      padding: 0.625rem;
+      font-size: 1rem;
+      color: rgba($color: $clr_1, $alpha: 0.7);
+      //   background-color: white;
+      //   text-decoration: none;
+      //   outline: none;
+      //   border: none;
+    }
+  }
+}
