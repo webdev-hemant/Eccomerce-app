@@ -1,9 +1,22 @@
 import React, { useReducer } from "react";
 
+interface Istate {
+  cartItems: {
+    id: number;
+    title: string;
+    price: number;
+    description: string;
+    category: string;
+    image: string;
+    rating: {
+      rate: number;
+      count: number;
+    };
+  }[];
+}
+
 interface ICtxInitialData {
-  state: {
-    cartItems: any[];
-  };
+  state: Istate;
   reducerDispatch: React.Dispatch<any>;
 }
 
@@ -24,9 +37,6 @@ const cartReducer = (state: any, action: any): any => {
         ...state,
         cartItems: [...state.cartItems, newStateData],
       };
-      // state.cartItems.push(newStateData);
-      // const filteredState = state.cartItems.filter(item => )
-      // console.log(state);
       return newState;
   }
 };
