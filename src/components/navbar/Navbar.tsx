@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import MobileNavMenu from "./MobileNavMenu";
 import closeIcon from "images/close.png";
 import hamburger from "images/hamburger.png";
@@ -14,8 +14,9 @@ interface INavroutes {
 }
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { state } = useContext(GlobalCtx);
+  const navigate = useNavigate();
 
   const NavRoutes: INavroutes[] = [
     {
@@ -71,7 +72,10 @@ const Navbar = () => {
             <img src="/logo.png" alt="" />
           </Link>
         </div>
-        <div className={styles.navCheckoutSection}>
+        <div
+          onClick={() => navigate("/checkout")}
+          className={styles.navCheckoutSection}
+        >
           <span className={styles.cartNumber}>{state?.cartItems?.length}</span>
           <img src={shoppingcart} alt="" />
         </div>
