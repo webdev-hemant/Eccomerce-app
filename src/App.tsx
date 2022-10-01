@@ -1,9 +1,10 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePageSkeleton from "components/skeletonLoaders/HomePageSkeleton";
-import Navbar from "components/navbar/Navbar";
 const Home = lazy(() => import("modules/home/Home"));
+const Signup = lazy(() => import("modules/signup/Signup"));
 const Checkout = lazy(() => import("./modules/checkout/Checkout"));
+const Navbar = lazy(() => import("components/navbar/Navbar"));
 const Notfound = lazy(() => import("modules/notfound/Notfound"));
 const Cart = lazy(() => import("modules/cart/Cart"));
 const ProductDetails = lazy(
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="*" element={<Notfound />} />
           </Route>
+          <Route path="/signup-login" element={<Signup />} />
         </Routes>
       </Router>
     </Suspense>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import MobileNavMenu from "./MobileNavMenu";
 import closeIcon from "images/close.png";
@@ -17,6 +17,11 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { state } = useContext(GlobalCtx);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // verify if user logged in
+    localStorage.getItem("token") || navigate("/signup-login");
+  }, []);
 
   const NavRoutes: INavroutes[] = [
     {
