@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import MobileNavMenu from "./MobileNavMenu";
 import closeIcon from "images/close.png";
@@ -15,8 +15,24 @@ interface INavroutes {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { state } = useContext(GlobalCtx);
+  const { state, reducerDispatch } = useContext(GlobalCtx);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // verify if user logged in
+    if (
+      !localStorage.getItem("userName") &&
+      !localStorage.getItem("password")
+    ) {
+      navigate("/signup-login");
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    reducerDispatch({ type: "emtyCart" });
+    localStorage.clear();
+    navigate("/signup-login");
+  };
 
   const NavRoutes: INavroutes[] = [
     {
@@ -72,12 +88,16 @@ const Navbar = () => {
             <img src="/logo.png" alt="" />
           </Link>
         </div>
-        <div
-          onClick={() => navigate("/checkout")}
-          className={styles.navCheckoutSection}
-        >
+        <div className={styles.navCheckoutSection}>
           <span className={styles.cartNumber}>{state?.cartItems?.length}</span>
-          <img src={shoppingcart} alt="" />
+          <img
+            onClick={() => navigate("/checkout")}
+            src={shoppingcart}
+            alt=""
+          />
+          <div onClick={() => handleLogout()} className={styles.logoutButton}>
+            <button>Logout</button>
+          </div>
         </div>
       </nav>
       <main className={styles.mainContainer}>
@@ -118,6 +138,9 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
+          <div onClick={() => handleLogout()} className={styles.mobileLogout}>
+            <button>Logout</button>
+          </div>
         </div>
       </MobileNavMenu>
     </>
