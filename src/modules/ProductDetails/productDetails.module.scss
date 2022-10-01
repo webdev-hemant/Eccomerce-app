@@ -20,6 +20,9 @@
   }
   .infoWrapper {
     margin: 2rem;
+    @media screen and (max-width: 768px) {
+      margin: 0;
+    }
     .title {
       color: $clr_1;
     }
