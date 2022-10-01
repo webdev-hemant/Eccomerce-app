@@ -46,6 +46,10 @@ const cartReducer = (state: any, action: any): any => {
         ...state,
         cartItems: removerFromCart,
       };
+    case "emtyCart":
+      return {
+        cartitems: [],
+      };
   }
 };
 const GlobalContext = ({ children }: { children: JSX.Element }) => {
