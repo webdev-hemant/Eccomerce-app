@@ -47,7 +47,7 @@ const Input = (props: Iprops) => {
 
   useEffect(() => {
     if (inputRef) getRef?.(inputRef);
-  }, []);
+  }, [getRef]);
 
   return (
     <div style={divStyle} className={styles.inputContainer}>

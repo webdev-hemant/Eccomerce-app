@@ -54,7 +54,7 @@ const Signup = () => {
     if (localStorage.getItem("userName") && localStorage.getItem("password")) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <div className={styles.signupWrapper}>

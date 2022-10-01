@@ -26,7 +26,7 @@ const Navbar = () => {
     ) {
       navigate("/signup-login");
     }
-  }, []);
+  }, [navigate]);
 
   const handleLogout = () => {
     reducerDispatch({ type: "emtyCart" });
