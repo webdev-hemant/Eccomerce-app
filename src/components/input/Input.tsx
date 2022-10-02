@@ -24,7 +24,7 @@ interface Iprops {
 
 const Input = (props: Iprops) => {
   const inputRef = useRef<any>(null);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [password, setPassword] = useState<"password" | "text">("password");
   const {
     type = "text",
     placeholder = "",
@@ -59,11 +59,7 @@ const Input = (props: Iprops) => {
       </label>
       <input
         ref={inputRef}
-        type={
-          type !== "password"
-            ? type
-            : (type === "password" && showPassword && "text") || "password"
-        }
+        type={type === "password" ? password : type}
         value={value}
         onChange={onChange}
         onFocus={onFocus}
@@ -79,21 +75,24 @@ const Input = (props: Iprops) => {
         style={inputStyle}
         {...rest}
       />
-      {isError && (
-        <div className={styles.errorWrapper}>
-          <p className={styles.errorMessage}>{errorMessage}</p>
-        </div>
-      )}
+
+      <div className={styles.errorWrapper}>
+        <p className={styles.errorMessage}>{isError && errorMessage}</p>
+      </div>
+
       {type === "password" && (
         <div
-          onClick={() => setShowPassword((prev) => !prev)}
-          className={styles.passwordIconWrapper}
+          onClick={() =>
+            setPassword((prev) => (prev === "password" ? "text" : "password"))
+          }
+          className={`${styles.passwordIconWrapper} ${
+            isError && styles.isError
+          }`}
         >
-          {showPassword ? (
-            <img src={viewPassword} alt="view password" />
-          ) : (
-            <img src={hidePassword} alt="hide password" />
-          )}
+          <img
+            src={password === "password" ? hidePassword : viewPassword}
+            alt={password === "password" ? "hide password" : "view password"}
+          />
         </div>
       )}
     </div>
