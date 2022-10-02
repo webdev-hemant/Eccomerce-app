@@ -45,8 +45,14 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
-    setIsOpenmodal(true);
+    try {
+      if (!localStorage.getItem("isModalClosed")) {
+        document.body.style.overflow = "hidden";
+        setIsOpenmodal(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   useEffect(() => {
@@ -55,6 +61,7 @@ const Home = () => {
 
   const handleCloseModal = () => {
     document.body.style.overflow = "unset";
+    localStorage.setItem("isModalClosed", "true");
     setIsOpenmodal(false);
   };
 

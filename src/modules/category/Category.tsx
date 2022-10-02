@@ -37,7 +37,7 @@ const Category = () => {
   return (
     <div className={styles.categoriesWrapper}>
       {data?.map((item: IApiData) => (
-        <div className={styles.productWrapper}>
+        <div key={item.title} className={styles.productWrapper}>
           <Product variant={Productvariant.PRODUCTWITHTWOCOUMNS} data={item} />
         </div>
       ))}

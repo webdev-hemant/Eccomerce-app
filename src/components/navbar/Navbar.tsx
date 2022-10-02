@@ -41,19 +41,19 @@ const Navbar = () => {
     },
     {
       name: "Electronics",
-      route: "/electronics",
+      route: "/category/electronics",
     },
     {
       name: "Jewelery",
-      route: "/jewelery",
+      route: "/category/jewelery",
     },
     {
       name: "Men's clothing",
-      route: "/men's clothing",
+      route: "/category/men's clothing",
     },
     {
       name: "Women's clothing",
-      route: "/women's clothing",
+      route: "/category/women's clothing",
     },
   ];
 
