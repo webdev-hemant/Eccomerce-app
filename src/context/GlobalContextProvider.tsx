@@ -13,6 +13,7 @@ interface Istate {
       count: number;
     };
   }[];
+  totalCost: number;
 }
 
 interface ICtxInitialData {
@@ -22,42 +23,59 @@ interface ICtxInitialData {
 
 export const GlobalCtx = React.createContext<ICtxInitialData>({
   state: {
-    cartItems: JSON.parse(localStorage.getItem("cartData") || "") || [],
+    cartItems:
+      JSON.parse(localStorage.getItem("cartData") || "")?.cartItems || [],
+    totalCost: JSON.parse(localStorage.getItem("cartData") || "")?.totalCost,
   },
   reducerDispatch: () => {},
 });
 const initialState = {
-  cartItems: JSON.parse(localStorage.getItem("cartData") || "") || [],
+  cartItems:
+    JSON.parse(localStorage.getItem("cartData") || "")?.cartItems || [],
+  totalCost: JSON.parse(localStorage.getItem("cartData") || "")?.totalCost,
 };
 const cartReducer = (state: any, action: any): any => {
   const { newStateData } = action;
+
+  const getTotalCost = (array: any[]) => {
+    return array?.reduce((acc, curr) => {
+      return acc + curr?.price;
+    }, 0);
+  };
+
   try {
     switch (action.type) {
+      // -------------------------------------------------------------------
       case "addToCart":
         const newAddedToCart = {
           ...state,
+          totalCost: getTotalCost([...state?.cartItems, newStateData]) || 0,
           cartItems: [...state?.cartItems, newStateData],
         };
-        localStorage.setItem(
-          "cartData",
-          JSON.stringify(newAddedToCart.cartItems)
-        );
+        localStorage.setItem("cartData", JSON.stringify(newAddedToCart));
         return newAddedToCart;
+      // -------------------------------------------------------------------
       case "removeFromCart":
-        const removerFromCart = state.cartItems.filter(
+        const removedItemArray = state.cartItems.filter(
           (item: any) => item.id !== newStateData.id
         );
-        localStorage.setItem("cartData", JSON.stringify(removerFromCart));
-        return {
+        const removedCartItemState = {
           ...state,
-          cartItems: removerFromCart,
+          totalCost: getTotalCost(removedItemArray),
+          cartItems: removedItemArray,
         };
+        localStorage.setItem("cartData", JSON.stringify(removedCartItemState));
+        return removedCartItemState;
+      // -------------------------------------------------------------------
       case "emtyCart":
-        localStorage.setItem("cartData", JSON.stringify([]));
-        return {
+        const emtyCart = {
           ...state,
+          totalCost: 0,
           cartItems: [],
         };
+        localStorage.setItem("cartData", JSON.stringify(emtyCart));
+        return emtyCart;
+      // -------------------------------------------------------------------
     }
   } catch (error) {
     console.log(error);

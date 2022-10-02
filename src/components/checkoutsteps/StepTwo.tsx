@@ -17,7 +17,11 @@ const StepTwo = () => {
             </div>
             <div className={styles.cartTotal}>
               <img src={smallcart} alt="" />
-              <p className={styles.price}>$20.99</p>
+              <p className={styles.price}>
+                $
+                {JSON.parse(localStorage.getItem("cartData") || "")
+                  ?.totalCost || 0}
+              </p>
             </div>
           </div>
         </div>

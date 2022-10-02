@@ -10,25 +10,26 @@ const StepOne = () => {
   const navigate = useNavigate();
 
   const handleProceed = () => {
-    console.log(state?.cartItems?.length);
     state?.cartItems?.length && navigate("?step=2");
   };
 
   useEffect(() => {
     try {
-      const total = state?.cartItems?.reduce((acc, curr) => {
-        return acc + curr.price;
-      }, 0);
-      setTotalValue(total);
-    } catch (error) {}
-  }, [state?.cartItems]);
+      setTotalValue(state?.totalCost);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [state?.totalCost]);
 
   return (
     <div className={styles.cartWrapper}>
       <div className={styles.productInformation}>
-        {JSON.parse(localStorage.getItem("cartData") || "")?.map(
-          (item: IApiData) => (
-            <div key={item.title} className={styles.cartArrayContainer}>
+        {JSON.parse(localStorage.getItem("cartData") || "")?.cartItems?.map(
+          (item: IApiData, index: number) => (
+            <div
+              key={`${item.title}${index}`}
+              className={styles.cartArrayContainer}
+            >
               <div className={styles.imgContainer}>
                 <img src={item.image} alt="" />
               </div>
