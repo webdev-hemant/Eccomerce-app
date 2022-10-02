@@ -3,10 +3,27 @@ import creditCardImg from "images/creditcard.png";
 import paypalIcon from "images/paypalicon.png";
 import smallcart from "images/smallcart.png";
 import paypalWithName from "images/paypalwithname.png";
+import { toast, ToastContainer } from "react-toastify";
+import { useContext } from "react";
+import { GlobalCtx } from "context/GlobalContextProvider";
 import styles from "./steptwo.module.scss";
 
 const StepTwo = () => {
   const navigate = useNavigate();
+  const { reducerDispatch } = useContext(GlobalCtx);
+  const handlePayNow = () => {
+    toast.success("Payment Successful!", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      // pauseOnHover: true,
+      draggable: true,
+    });
+    // reducerDispatch({})
+    // navigate();
+  };
+
   return (
     <div className={styles.steptwoContainer}>
       <div className={styles.paypalPaymentContainer}>
@@ -24,6 +41,41 @@ const StepTwo = () => {
               </p>
             </div>
           </div>
+          <h6 className={styles.welcomeText}>
+            Welcome back, {localStorage.getItem("userName")}
+          </h6>
+          <h4 style={{ fontSize: "1.2rem" }}>Pay with</h4>
+          <div className={styles.paypalBalance}>
+            <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+              <img
+                style={{ objectFit: "contain" }}
+                width={20}
+                src={paypalIcon}
+                alt=""
+              />
+              <p>PayPal Balance</p>
+            </div>
+            <p>$0 USD</p>
+          </div>
+          <h3 style={{ textAlign: "end", marginTop: "3rem" }}>
+            Total: $
+            {JSON.parse(localStorage.getItem("cartData") || "")?.totalCost || 0}
+          </h3>
+          <button
+            onClick={() => handlePayNow()}
+            style={{
+              margin: "2rem 0",
+              width: "100%",
+              padding: "0.6rem 0",
+              fontSize: "1rem",
+              cursor: "pointer",
+              color: "#fff",
+              border: "1.5px solid lightgray",
+              backgroundColor: "rgb(73, 158, 255)",
+            }}
+          >
+            Pay Now
+          </button>
         </div>
         <div className={styles.saferWrapper}>
           <div className={styles.imgWrappr}>
@@ -56,6 +108,7 @@ const StepTwo = () => {
           ))}
         </ul>
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -18,8 +18,8 @@
       grid-template-columns: 1fr;
     }
     .payNowWrapper {
+      padding: 1rem 2rem 0 2rem;
       .paypalHeading {
-        padding: 1rem 2rem 0 2rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -49,6 +49,14 @@
           .price {
           }
         }
+      }
+      .welcomeText {
+        margin: 1rem 0;
+        font-size: 0.8rem;
+      }
+      .paypalBalance {
+        display: flex;
+        justify-content: space-between;
       }
     }
     .saferWrapper {
