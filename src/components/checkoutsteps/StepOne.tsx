@@ -2,35 +2,34 @@ import { GlobalCtx } from "context/GlobalContextProvider";
 import { IApiData } from "modules/home/Home";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./cart.module.scss";
+import styles from "./stepone.module.scss";
 
-const Cart = () => {
+const StepOne = () => {
   const [totalValue, setTotalValue] = useState<number>(0);
   const { reducerDispatch, state } = useContext(GlobalCtx);
   const navigate = useNavigate();
 
-  // console.log(JSON.parse(localStorage.getItem("cartData") || "").cartItems);
-
   const handleProceed = () => {
-    console.log(state?.cartItems?.length);
     state?.cartItems?.length && navigate("?step=2");
   };
 
   useEffect(() => {
     try {
-      const total = state?.cartItems?.reduce((acc, curr) => {
-        return acc + curr.price;
-      }, 0);
-      setTotalValue(total);
-    } catch (error) {}
-  }, [state?.cartItems]);
+      setTotalValue(state?.totalCost);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [state?.totalCost]);
 
   return (
     <div className={styles.cartWrapper}>
       <div className={styles.productInformation}>
-        {JSON.parse(localStorage.getItem("cartData") || "")?.map(
-          (item: IApiData) => (
-            <div key={item.title} className={styles.cartArrayContainer}>
+        {JSON.parse(localStorage.getItem("cartData") || "")?.cartItems?.map(
+          (item: IApiData, index: number) => (
+            <div
+              key={`${item.title}${index}`}
+              className={styles.cartArrayContainer}
+            >
               <div className={styles.imgContainer}>
                 <img src={item.image} alt="" />
               </div>
@@ -78,4 +77,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default StepOne;

@@ -33,10 +33,10 @@ const Product = ({ data, variant }: IProps) => {
     reducerDispatch({ type: "addToCart", newStateData: data });
     toast.success(`${data?.title} added to Cart!`, {
       position: "bottom-right",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
-      pauseOnHover: true,
+      // pauseOnHover: true,
       draggable: true,
     });
   };

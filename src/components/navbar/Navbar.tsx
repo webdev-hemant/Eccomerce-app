@@ -90,7 +90,8 @@ const Navbar = () => {
         </div>
         <div className={styles.navCheckoutSection}>
           <span className={styles.cartNumber}>
-            {JSON.parse(localStorage.getItem("cartData") || "")?.length || 0}
+            {JSON.parse(localStorage.getItem("cartData") || "")?.cartItems
+              ?.length || 0}
           </span>
           <img
             onClick={() => navigate("/checkout?step=1")}

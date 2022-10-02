@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import GlobalReducer from "./globalReducer";
 
 interface Istate {
   cartItems: {
@@ -13,6 +14,7 @@ interface Istate {
       count: number;
     };
   }[];
+  totalCost: number;
 }
 
 interface ICtxInitialData {
@@ -22,49 +24,20 @@ interface ICtxInitialData {
 
 export const GlobalCtx = React.createContext<ICtxInitialData>({
   state: {
-    cartItems: JSON.parse(localStorage.getItem("cartData") || "") || [],
+    cartItems:
+      JSON.parse(localStorage.getItem("cartData") || "")?.cartItems || [],
+    totalCost: JSON.parse(localStorage.getItem("cartData") || "")?.totalCost,
   },
   reducerDispatch: () => {},
 });
 const initialState = {
-  cartItems: JSON.parse(localStorage.getItem("cartData") || "") || [],
+  cartItems:
+    JSON.parse(localStorage.getItem("cartData") || "")?.cartItems || [],
+  totalCost: JSON.parse(localStorage.getItem("cartData") || "")?.totalCost,
 };
-const cartReducer = (state: any, action: any): any => {
-  const { newStateData } = action;
-  try {
-    switch (action.type) {
-      case "addToCart":
-        const newAddedToCart = {
-          ...state,
-          cartItems: [...state?.cartItems, newStateData],
-        };
-        localStorage.setItem(
-          "cartData",
-          JSON.stringify(newAddedToCart.cartItems)
-        );
-        return newAddedToCart;
-      case "removeFromCart":
-        const removerFromCart = state.cartItems.filter(
-          (item: any) => item.id !== newStateData.id
-        );
-        localStorage.setItem("cartData", JSON.stringify(removerFromCart));
-        return {
-          ...state,
-          cartItems: removerFromCart,
-        };
-      case "emtyCart":
-        localStorage.setItem("cartData", JSON.stringify([]));
-        return {
-          ...state,
-          cartItems: [],
-        };
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
+
 const GlobalContext = ({ children }: { children: JSX.Element }) => {
-  const [state, dispatch] = useReducer(cartReducer, initialState);
+  const [state, dispatch] = useReducer(GlobalReducer, initialState);
   const reducerDispatch = (value: any) => {
     dispatch(value);
   };
