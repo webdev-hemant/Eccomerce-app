@@ -22,40 +22,45 @@ interface ICtxInitialData {
 
 export const GlobalCtx = React.createContext<ICtxInitialData>({
   state: {
-    cartItems: [],
+    cartItems: JSON.parse(localStorage.getItem("cartData") || "") || [],
   },
   reducerDispatch: () => {},
 });
 const initialState = {
-  cartItems: [],
+  cartItems: JSON.parse(localStorage.getItem("cartData") || "") || [],
 };
 const cartReducer = (state: any, action: any): any => {
   const { newStateData } = action;
-  switch (action.type) {
-    case "addToCart":
-      const newAddedToCart = {
-        ...state,
-        cartItems: [...state.cartItems, newStateData],
-      };
-      localStorage.setItem(
-        "cartData",
-        JSON.stringify(newAddedToCart.cartItems)
-      );
-      return newAddedToCart;
-    case "removeFromCart":
-      const removerFromCart = state.cartItems.filter(
-        (item: any) => item.id !== newStateData.id
-      );
-      localStorage.setItem("cartData", JSON.stringify(removerFromCart));
-      return {
-        ...state,
-        cartItems: removerFromCart,
-      };
-    case "emtyCart":
-      localStorage.setItem("cartData", JSON.stringify([]));
-      return {
-        cartitems: [],
-      };
+  try {
+    switch (action.type) {
+      case "addToCart":
+        const newAddedToCart = {
+          ...state,
+          cartItems: [...state?.cartItems, newStateData],
+        };
+        localStorage.setItem(
+          "cartData",
+          JSON.stringify(newAddedToCart.cartItems)
+        );
+        return newAddedToCart;
+      case "removeFromCart":
+        const removerFromCart = state.cartItems.filter(
+          (item: any) => item.id !== newStateData.id
+        );
+        localStorage.setItem("cartData", JSON.stringify(removerFromCart));
+        return {
+          ...state,
+          cartItems: removerFromCart,
+        };
+      case "emtyCart":
+        localStorage.setItem("cartData", JSON.stringify([]));
+        return {
+          ...state,
+          cartItems: [],
+        };
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
 const GlobalContext = ({ children }: { children: JSX.Element }) => {
