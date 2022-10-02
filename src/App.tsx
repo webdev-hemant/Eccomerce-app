@@ -6,7 +6,6 @@ const Signup = lazy(() => import("modules/signup/Signup"));
 const Checkout = lazy(() => import("./modules/checkout/Checkout"));
 const Navbar = lazy(() => import("components/navbar/Navbar"));
 const Notfound = lazy(() => import("modules/notfound/Notfound"));
-const Cart = lazy(() => import("modules/checkout/Checkout"));
 const ProductDetails = lazy(
   () => import("modules/ProductDetails/ProductDetails")
 );
