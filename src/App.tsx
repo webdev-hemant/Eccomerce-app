@@ -6,7 +6,7 @@ const Signup = lazy(() => import("modules/signup/Signup"));
 const Checkout = lazy(() => import("./modules/checkout/Checkout"));
 const Navbar = lazy(() => import("components/navbar/Navbar"));
 const Notfound = lazy(() => import("modules/notfound/Notfound"));
-const Cart = lazy(() => import("modules/cart/Cart"));
+const Cart = lazy(() => import("modules/checkout/Checkout"));
 const ProductDetails = lazy(
   () => import("modules/ProductDetails/ProductDetails")
 );
@@ -20,7 +20,7 @@ export default function App() {
           <Route path="/" element={<Navbar />}>
             <Route index element={<Home />} />
             <Route path="/category/:categoryName" element={<Category />} />
-            <Route path="/checkout" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/products/:productId" element={<ProductDetails />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="*" element={<Notfound />} />

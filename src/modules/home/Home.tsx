@@ -9,7 +9,7 @@ import greetingThumb from "images/greetingthumb.png";
 import sadfaceImage from "images/sadface.png";
 import styles from "./home.module.scss";
 
-interface IApiData {
+export interface IApiData {
   id: number;
   title: string;
   price: number;

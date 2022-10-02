@@ -37,16 +37,22 @@ const cartReducer = (state: any, action: any): any => {
         ...state,
         cartItems: [...state.cartItems, newStateData],
       };
+      localStorage.setItem(
+        "cartData",
+        JSON.stringify(newAddedToCart.cartItems)
+      );
       return newAddedToCart;
     case "removeFromCart":
       const removerFromCart = state.cartItems.filter(
         (item: any) => item.id !== newStateData.id
       );
+      localStorage.setItem("cartData", JSON.stringify(removerFromCart));
       return {
         ...state,
         cartItems: removerFromCart,
       };
     case "emtyCart":
+      localStorage.setItem("cartData", JSON.stringify([]));
       return {
         cartitems: [],
       };
