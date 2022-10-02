@@ -40,12 +40,18 @@ const Signup = () => {
   };
 
   const onSubmit = () => {
-    const { userName, password } = inputFormError;
-    if (!userName && !password) {
-      for (const [userName, password] of Object.entries(loginForm)) {
-        localStorage.setItem(userName, password);
+    for (const [key, value] of Object.entries(loginForm)) {
+      setIputFormError((prev) => ({ ...prev, [key]: value.length <= 5 }));
+      const { userName, password } = inputFormError;
+      if (
+        !userName &&
+        !password &&
+        loginForm.userName.length >= 5 &&
+        loginForm.password.length >= 5
+      ) {
+        localStorage.setItem(key, value);
+        navigate("/");
       }
-      navigate("/");
     }
   };
 
@@ -90,7 +96,11 @@ const Signup = () => {
             onBlur={handleBlur}
           />
           <div className={styles.submitWrapper}>
-            <button onClick={() => onSubmit()} className={styles.submitButton}>
+            <button
+              type="button"
+              onClick={() => onSubmit()}
+              className={styles.submitButton}
+            >
               submit
             </button>
           </div>
