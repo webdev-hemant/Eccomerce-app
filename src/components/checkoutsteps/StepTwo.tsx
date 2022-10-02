@@ -8,10 +8,13 @@ import { useContext } from "react";
 import { GlobalCtx } from "context/GlobalContextProvider";
 import styles from "./steptwo.module.scss";
 
+let timeOut: NodeJS.Timeout;
+
 const StepTwo = () => {
   const navigate = useNavigate();
   const { reducerDispatch } = useContext(GlobalCtx);
   const handlePayNow = () => {
+    clearTimeout(timeOut);
     toast.success("Payment Successful!", {
       position: "bottom-right",
       autoClose: 2000,
@@ -20,8 +23,10 @@ const StepTwo = () => {
       // pauseOnHover: true,
       draggable: true,
     });
-    // reducerDispatch({})
-    // navigate();
+    reducerDispatch({ type: "emtyCart" });
+    timeOut = setTimeout(() => {
+      navigate("/");
+    }, 3000);
   };
 
   return (
