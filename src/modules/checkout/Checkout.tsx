@@ -1,20 +1,13 @@
-import MyErrorBoundary from "components/errorBoundary/MyErrorBoundary";
 import { useState } from "react";
-
-function Bomb(): JSX.Element {
-  throw new Error("💥 CABOOM 💥");
-}
+import { useSearchParams } from "react-router-dom";
+import Cart from "components/cart/Cart";
 
 const Checkout = () => {
-  const [isTrue, setIsTrue] = useState<boolean>(false);
+  const [searchParams, setSearchParams] = useSearchParams();
   return (
     <div>
-      Checkout
-      <button type="button" onClick={() => setIsTrue((e) => !e)}>
-        bomb
-      </button>
-      {/* {isTrue && <Bomb />} */}
-      <MyErrorBoundary>{isTrue ? <Bomb /> : <h2>hi</h2>}</MyErrorBoundary>
+      {searchParams.get("step") === "1" && <Cart />}
+      {searchParams.get("step") === "2" && <Cart />}
     </div>
   );
 };

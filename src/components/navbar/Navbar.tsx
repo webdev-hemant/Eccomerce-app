@@ -91,7 +91,7 @@ const Navbar = () => {
         <div className={styles.navCheckoutSection}>
           <span className={styles.cartNumber}>{state?.cartItems?.length}</span>
           <img
-            onClick={() => navigate("/checkout")}
+            onClick={() => navigate("/checkout?step=1")}
             src={shoppingcart}
             alt=""
           />
