@@ -2,14 +2,12 @@ import { GlobalCtx } from "context/GlobalContextProvider";
 import { IApiData } from "modules/home/Home";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./cart.module.scss";
+import styles from "./stepone.module.scss";
 
-const Cart = () => {
+const StepOne = () => {
   const [totalValue, setTotalValue] = useState<number>(0);
   const { reducerDispatch, state } = useContext(GlobalCtx);
   const navigate = useNavigate();
-
-  // console.log(JSON.parse(localStorage.getItem("cartData") || "").cartItems);
 
   const handleProceed = () => {
     console.log(state?.cartItems?.length);
@@ -78,4 +76,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default StepOne;
