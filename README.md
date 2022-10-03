@@ -8,6 +8,7 @@ scss modules.
 context api for state management.
 Error boundary component.
 lazy loading components.
+useCallback for performance optimization.
 React portal for modals and mobile navbar.
 
 
