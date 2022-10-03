@@ -16,7 +16,6 @@ const GlobalReducer = (state: any, action: any): any => {
           totalCost: getTotalCost([...state?.cartItems, newStateData]) || 0,
           cartItems: [...state?.cartItems, newStateData],
         };
-        localStorage.setItem("cartData", JSON.stringify(newAddedToCart));
         return newAddedToCart;
       // -------------------------------------------------------------------
       case "removeFromCart":
@@ -28,7 +27,6 @@ const GlobalReducer = (state: any, action: any): any => {
           totalCost: getTotalCost(removedItemArray),
           cartItems: removedItemArray,
         };
-        localStorage.setItem("cartData", JSON.stringify(removedCartItemState));
         return removedCartItemState;
       // -------------------------------------------------------------------
       case "emtyCart":
@@ -37,7 +35,6 @@ const GlobalReducer = (state: any, action: any): any => {
           totalCost: 0,
           cartItems: [],
         };
-        localStorage.setItem("cartData", JSON.stringify(emtyCart));
         return emtyCart;
       // -------------------------------------------------------------------
     }

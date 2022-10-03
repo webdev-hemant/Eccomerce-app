@@ -6,6 +6,7 @@ import styles from "./stepone.module.scss";
 
 const StepOne = () => {
   const [totalValue, setTotalValue] = useState<number>(0);
+  const [apiData, setApiData] = useState<IApiData[]>([]);
   const { reducerDispatch, state } = useContext(GlobalCtx);
   const navigate = useNavigate();
 
@@ -15,42 +16,41 @@ const StepOne = () => {
 
   useEffect(() => {
     try {
+      setApiData(state?.cartItems);
       setTotalValue(state?.totalCost);
     } catch (error) {
       console.log(error);
     }
-  }, [state?.totalCost]);
+  }, [state?.totalCost, state?.cartItems]);
 
   return (
     <div className={styles.cartWrapper}>
       <div className={styles.productInformation}>
-        {JSON.parse(localStorage.getItem("cartData") || "")?.cartItems?.map(
-          (item: IApiData, index: number) => (
-            <div
-              key={`${item.title}${index}`}
-              className={styles.cartArrayContainer}
-            >
-              <div className={styles.imgContainer}>
-                <img src={item.image} alt="" />
-              </div>
-              <div className={styles.details}>
-                <h5>{item.title}</h5>
-                <h6>price: ${item.price}</h6>
-              </div>
-              <button
-                onClick={() =>
-                  reducerDispatch({
-                    type: "removeFromCart",
-                    newStateData: item,
-                  })
-                }
-                type="button"
-              >
-                Remove
-              </button>
+        {apiData?.map((item: IApiData, index: number) => (
+          <div
+            key={`${item.title}${index}`}
+            className={styles.cartArrayContainer}
+          >
+            <div className={styles.imgContainer}>
+              <img src={item.image} alt="" />
             </div>
-          )
-        )}
+            <div className={styles.details}>
+              <h5>{item.title}</h5>
+              <h6>price: ${item.price}</h6>
+            </div>
+            <button
+              onClick={() =>
+                reducerDispatch({
+                  type: "removeFromCart",
+                  newStateData: item,
+                })
+              }
+              type="button"
+            >
+              Remove
+            </button>
+          </div>
+        ))}
       </div>
       <div className={styles.cartCheckoutContainer}>
         <div className={styles.cartTotal}>
