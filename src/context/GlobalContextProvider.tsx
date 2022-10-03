@@ -24,16 +24,18 @@ interface ICtxInitialData {
 
 export const GlobalCtx = React.createContext<ICtxInitialData>({
   state: {
-    cartItems:
-      JSON.parse(localStorage.getItem("cartData") || "")?.cartItems || [],
-    totalCost: JSON.parse(localStorage.getItem("cartData") || "")?.totalCost,
+    cartItems: [],
+    // JSON.parse(localStorage.getItem("cartData") || "")?.cartItems || [],
+    totalCost: 0,
+    // JSON.parse(localStorage.getItem("cartData") || "")?.totalCost,
   },
   reducerDispatch: () => {},
 });
 const initialState = {
-  cartItems:
-    JSON.parse(localStorage.getItem("cartData") || "")?.cartItems || [],
-  totalCost: JSON.parse(localStorage.getItem("cartData") || "")?.totalCost,
+  cartItems: [],
+  // JSON.parse(localStorage.getItem("cartData") || "")?.cartItems || [],
+  totalCost: 0,
+  // JSON.parse(localStorage.getItem("cartData") || "")?.totalCost,
 };
 
 const GlobalContext = ({ children }: { children: JSX.Element }) => {
