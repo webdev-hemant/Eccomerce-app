@@ -12,7 +12,7 @@ let timeOut: NodeJS.Timeout;
 
 const StepTwo = () => {
   const navigate = useNavigate();
-  const { reducerDispatch } = useContext(GlobalCtx);
+  const { state, reducerDispatch } = useContext(GlobalCtx);
   const handlePayNow = () => {
     clearTimeout(timeOut);
     toast.success("Payment Successful!", {
@@ -39,11 +39,7 @@ const StepTwo = () => {
             </div>
             <div className={styles.cartTotal}>
               <img src={smallcart} alt="" />
-              <p className={styles.price}>
-                $
-                {JSON.parse(localStorage.getItem("cartData") || "")
-                  ?.totalCost || 0}
-              </p>
+              <p className={styles.price}>${state?.totalCost}</p>
             </div>
           </div>
           <h6 className={styles.welcomeText}>
@@ -63,8 +59,7 @@ const StepTwo = () => {
             <p>$0 USD</p>
           </div>
           <h3 style={{ textAlign: "end", marginTop: "3rem" }}>
-            Total: $
-            {JSON.parse(localStorage.getItem("cartData") || "")?.totalCost || 0}
+            Total: ${state?.totalCost}
           </h3>
           <button
             onClick={() => handlePayNow()}
