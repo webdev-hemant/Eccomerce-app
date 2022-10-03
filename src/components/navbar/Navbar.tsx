@@ -15,7 +15,7 @@ interface INavroutes {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { reducerDispatch } = useContext(GlobalCtx);
+  const { reducerDispatch, state } = useContext(GlobalCtx);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -90,8 +90,7 @@ const Navbar = () => {
         </div>
         <div className={styles.navCheckoutSection}>
           <span className={styles.cartNumber}>
-            {JSON.parse(localStorage.getItem("cartData") || "")?.cartItems
-              ?.length || 0}
+            {state?.cartItems?.length || 0}
           </span>
           <img
             onClick={() => navigate("/checkout?step=1")}
